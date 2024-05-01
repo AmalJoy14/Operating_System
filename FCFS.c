@@ -24,10 +24,10 @@ void main()
            }
         else
            {
-            WT[i]=WT[i-1]+BT[i-1];
+            WT[i]=WT[i-1]+BT[i-1];         //or TAT[i-1];
             tot_wt+=WT[i];
             
-            TAT[i]=TAT[i-1]+BT[i];
+            TAT[i]=TAT[i-1]+BT[i];         //or WT[i]+BT[i]
             tot_tat+=TAT[i];
            }
        }
