@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 
 #define SEGSIZE 100
 
-int main(int argc, char *argv[]) {
+int main() {
     int shmid, key = ftok(".", 's');
     char *segptr, buff[] = "Hello";
 
