@@ -2,22 +2,29 @@
 #include <stdlib.h>
 
 void main()
-{
-    int head,limit,size,totalHeadMovement=0,direction;
-    printf("Enter the number of requests : ");
-    scanf("%d",&limit);
-    printf("Enter the request sequence\n");
-    int req[n];
-    for(i=0;i<n;i++)
-        scanf("%d",&req[i]);
-    printf("\nEnter initial head position : ");
-    scanf("%d",&head);
+{   
+   int head,limit,distance,seektime = 0 ,size,direction;
+   
+   printf("Enter initial head position\n");
+   scanf("%d",&head);
+   
+   printf("Enter number of requests\n");
+   scanf("%d",&limit);
+   int req[limit];
+    
+   printf("Enter requests:\n");
+   for(int i=0; i< limit ;i++)
+    scanf("%d",&req[i]);
+    
     printf("\nEnter total disk size : ");
     scanf("%d",&size);
+    
     printf("\nEnter the head movement direction(1 for high & 0 for low) : ");
-    scanf("%d",&direction)
-    for(i=0;i<n;i++){
-        for(int j=i+1;j<=n;j++){
+    scanf("%d",&direction);
+
+    //Sorting the req in asc
+    for(int i=0 ;i < limit ;i++){
+        for(int j=i+1; j<=limit ;j++){
             if(req[i]>req[j]){
                 int temp = req[i];
                 req[i]=req[j];
@@ -25,34 +32,21 @@ void main()
             }
         }
     }
-    int index=0;
-    while(index<n&&head>=req[index])
-        index++;
     if(direction==1){
-        for(i=index;i<n;i++){
-            totalHeadMovement+=abs(req[i]-head);
-            head=req[i];
-        }
-        totalHeadMovement+=abs(size-req[n-1]-1);
-        totalHeadMovement+=size-1;
-        head=0;
-        for(i=0;i<index;i++){
-            totalHeadMovement+=abs(req[i]-head);
-            head=req[i];
-        }
+        seektime += size - 1 - head;
+        seektime += size-1;
+        int endIndex;
+        for (endIndex = 0 ; req[endIndex] < head ; endIndex++);     //no statement
+        endIndex--;
+        seektime += req[endIndex];
     }
     else{
-        for(i=index-1;i>=0;i--){
-            totalHeadMovement+=abs(req[i]-head);
-            head=req[i];
-        }
-        totalHeadMovement+=abs(req[0]-0);
-        totalHeadMovement+=size-1;
-        head=size-1;
-        for(i=n-1;i>=index;i--){
-            totalHeadMovement+=abs(req[i]-head);
-            head=req[i];
-        }
+        seektime += head;
+        seektime += size-1;
+        int endIndex;
+        for (endIndex = limit ; req[endIndex] > head ; endIndex--);     //no statement
+        endIndex++;
+        seektime += size -1 - req[endIndex];
     }
-    printf("Total Head Movement is %d\n",totalHeadMovement);
+    printf("Total Head Movement is %d\n",seektime);
 }
