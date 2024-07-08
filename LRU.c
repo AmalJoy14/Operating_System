@@ -1,56 +1,49 @@
 #include <stdio.h>
-#include <limits.h>  //to use INT_MAX
-void main()
-{
-    int fNo, rNo, i, pgf = 0;
-    printf("Enter no of frames:\n");
-    scanf("%d", &fNo);
-    printf("Enter no of requests:\n");
-    scanf("%d", &rNo);
-    int frame[fNo], req[rNo], used[fNo];
-    for(i = 0; i < fNo; i++){
-        frame[i] = -1;  // Initialize frames to -1 indicating they are empty
-        used[i] = 0;    // Initialize used array for LRU tracking
+
+void main() {
+    int no_frame, no_request, i, pgf = 0;
+    printf("Enter the number of requests\n");
+    scanf("%d", &no_request);
+    printf("Enter the number of frames\n");
+    scanf("%d", &no_frame);
+    int frame[no_frame], req[no_request], time[no_frame];
+    for(i = 0; i < no_frame; i++) {
+        frame[i] = -1;
+        time[i] = 0;
     }
-    printf("Enter reference string:\n");
-    for(i = 0; i < rNo; i++)
+    printf("Enter the requests:\n");
+    for(i = 0; i < no_request; i++) {
         scanf("%d", &req[i]);
-    printf("Page replacement using LRU:\n");
-    for(i = 0; i < rNo; i++){
-        int avail = 0;
-        printf("%d : ", req[i]);
-        // Check if page already exists in frame
-        for(int a = 0; a < fNo; a++){
-            if(frame[a] == req[i]){
+    }
+    printf("Page replacement:\n");
+    for(i = 0; i < no_request; i++) {
+        int avail = 0, least = 0;
+        printf("%d :", req[i]);
+        for(int a = 0; a < no_frame; a++) {
+            if(frame[a] == req[i]) {
                 avail = 1;
-                used[a] = i + 1;  // Update the time of last use (using i + 1 because i starts from 0)
+                time[a] = i;  // Update the time of the page
                 break;
             }
         }
-        // If page fault occurs, replace the least recently used page
-        if(avail == 0){
-            int leastUsed = INT_MAX;
-            int replaceIndex = -1;
-            // Find the least recently used page
-            for(int a = 0; a < fNo; a++){
-                if(used[a] < leastUsed){
-                    leastUsed = used[a];
-                    replaceIndex = a;
+        if(avail == 0) {
+            for(int a = 0; a < no_frame; a++) {
+                if(time[a] < time[least]) {
+                    least = a;
                 }
             }
-            // Replace the least recently used page with the current page
-            frame[replaceIndex] = req[i];
-            used[replaceIndex] = i + 1;  // Update the time of last use
+            frame[least] = req[i];
+            time[least] = i ;  // Update the time of the new page
             pgf++;
         }
-        // Print current state of frames after each request
-        for(int a = 0; a < fNo; a++){
+        for(int a = 0; a < no_frame; a++) {
             printf("%d\t", frame[a]);
         }
         printf("\n");
     }
-    printf("Number of page faults = %d\n", pgf);
+    printf("No of page faults = %d\n", pgf);
 }
+  
  /*
                    OUTPUT
       Enter no of frames:
