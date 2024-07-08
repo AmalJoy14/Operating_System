@@ -24,7 +24,7 @@ void main()
 
     //Sorting the req in asc
     for(int i=0 ;i < limit ;i++){
-        for(int j=i+1; j<=limit ;j++){
+        for(int j=i+1; j<limit ;j++){
             if(req[i]>req[j]){
                 int temp = req[i];
                 req[i]=req[j];
