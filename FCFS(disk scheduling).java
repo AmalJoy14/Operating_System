@@ -2,19 +2,25 @@
 #include <stdlib.h>
 void main()
 {
-   int head,i,n,distance,seektime = 0,a[20];
+   int head,limit,distance,seektime = 0;
+   
    printf("Enter initial head position\n");
    scanf("%d",&head);
+   
    printf("Enter number of requests\n");
-   scanf("%d",&n);
+   scanf("%d",&limit);
+   int req[limit];
+   req[0]= head;
+   
    printf("Enter requests\n");
-   for(i=1;i<=n;i++)
-    scanf("%d",&a[i]);
-   a[0]= head;
+   for(int i=1; i< limit+1 ;i++)
+    scanf("%d",&req[i]);
+    
+   
    printf("FCFS\n");
-   for(i=0;i<n;i++){
-    distance=abs(a[i]-a[i+1]);
-    printf("Head movement from %d to %d is %d",a[i],a[i+1],distance);
+   for(int i=0 ;i<limit ;i++){
+    distance = abs(req[i] - req[i+1]);
+    printf("Head movement from %d to %d is %d\n",req[i],req[i+1],distance);
     seektime+=distance;
    }
    printf("Seektime is %d",seektime);
