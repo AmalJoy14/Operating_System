@@ -35,20 +35,20 @@ void main() {
         for(int j = 0; j < no_frame; j++) {
             if(frame[j] == req[i]) {
                 avail = 1; // Page is found in the frame
-                time[j] = i;  // Update the time of the page
+                time[j] = i+1;  // Update the time of the page
                 break;
             }
         }
         
         // If the page is not found in any frame, replace the least recently used page (LRU)
         if(avail == 0) {
-            for(int j = 0; j < no_frame; j++) {
+            for(int j = 1; j < no_frame; j++) {
                 if(time[j] < time[least]) {
                     least = j; // Find the least recently used page
                 }
             }
             frame[least] = req[i]; // Replace the page in the frame
-            time[least] = i;  // Update the time of the new page
+            time[least] = i+1;  // Update the time of the new page
             pgf++; // Increment the page fault count
         }
         
