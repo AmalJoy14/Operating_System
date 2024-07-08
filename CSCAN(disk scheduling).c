@@ -32,6 +32,7 @@ void main()
             }
         }
     }
+    
     if(direction==1){
         seektime += size - 1 - head;
         seektime += size-1;
@@ -44,7 +45,7 @@ void main()
         seektime += head;
         seektime += size-1;
         int endIndex;
-        for (endIndex = limit ; req[endIndex] > head ; endIndex--);     //no statement
+        for (endIndex = limit-1 ; req[endIndex] > head ; endIndex--);     //no statement
         endIndex++;
         seektime += size -1 - req[endIndex];
     }
