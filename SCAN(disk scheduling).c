@@ -34,19 +34,15 @@ void main()
     }
     if(direction==1){
         seektime += size - 1 - head;
-        seektime += size-1;
-        int endIndex;
-        for (endIndex = 0 ; req[endIndex] < head ; endIndex++);     //no statement
-        endIndex--;
-        seektime += req[endIndex];
+        if (req[0] < head){
+            seektime += size - 1 - req[0];
+        }
     }
     else{
         seektime += head;
-        seektime += size-1;
-        int endIndex;
-        for (endIndex = limit ; req[endIndex] > head ; endIndex--);     //no statement
-        endIndex++;
-        seektime += size -1 - req[endIndex];
+        if (req[limit] > head){
+            seektime += req[limit];
+        }
     }
     printf("Total Head Movement is %d\n",seektime);
 }
