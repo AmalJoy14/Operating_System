@@ -41,8 +41,8 @@ void main()
     }
     else{
         seektime += head;
-        if (req[limit] > head){
-            seektime += req[limit];
+        if (req[limit-1] > head){
+            seektime += req[limit -1];
         }
     }
     printf("Total Head Movement is %d\n",seektime);
