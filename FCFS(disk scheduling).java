@@ -9,7 +9,7 @@ void main()
    
    printf("Enter number of requests\n");
    scanf("%d",&limit);
-   int req[limit];
+   int req[limit + 1];
    req[0]= head;
    
    printf("Enter requests\n");
