@@ -33,11 +33,11 @@ void main() {
         printf("%d :", req[i]);
         
         // Check if page is already in frame
-        for(int a = 0; a < no_frame; a++) {
-            if(frame[a] == req[i]) {
+        for(int j = 0; j < no_frame; j++) {
+            if(frame[j] == req[i]) {
                 avail = 1;
-                freq[a]++;        // Increase the frequency of the page
-                time[a] = i;      // Update the time of the page
+                freq[j]++;        // Increase the frequency of the page
+                time[j] = i;      // Update the time of the page
                 break;
             }
         }
@@ -46,14 +46,14 @@ void main() {
         if(avail == 0) {
             int min_freq = freq[0], oldest = time[0];
             least = 0;
-            for(int a = 1; a < no_frame; a++) {
-                if(frame[a] == -1) {
-                    least = a;   // Found an empty frame
+            for(int j = 1; j < no_frame; j++) {
+                if(frame[j] == -1) {
+                    least = j;   // Found an empty frame
                     break;
-                } else if(freq[a] < min_freq || (freq[a] == min_freq && time[a] < oldest)) {
-                    least = a;   // Find the page with minimum frequency and oldest time
-                    min_freq = freq[a];
-                    oldest = time[a];
+                } else if(freq[j] < min_freq || (freq[j] == min_freq && time[j] < oldest)) {
+                    least = j;   // Find the page with minimum frequency and oldest time
+                    min_freq = freq[j];
+                    oldest = time[j];
                 }
             }
             frame[least] = req[i];    // Replace the least frequently used page
@@ -63,8 +63,8 @@ void main() {
         }
         
         // Print current frames
-        for(int a = 0; a < no_frame; a++) {
-            printf("%d\t", frame[a]);
+        for(int j = 0; j < no_frame; j++) {
+            printf("%d\t", frame[j]);
         }
         printf("\n");
     }
